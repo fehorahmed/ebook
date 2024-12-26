@@ -61,10 +61,10 @@ class HomePageController extends Controller
 
         return view('frontend.pages.book_details', compact('book', 'bookPage', 'likes', 'comments', 'ads'));
     }
-    public function bookGiftCoin($id)
+    public function bookGiftCoin($slug)
     {
-        $data = decrypt($id);
-        $book = book::find($data);
+
+        $book = book::where('slug',$slug)->first();
 
         return view('frontend.pages.book_gift_coin', compact('book'));
     }
@@ -182,15 +182,18 @@ class HomePageController extends Controller
         $ck_nextPage = BookPageContent::where(['book_id' => $book->id])->orderBy('id', 'DESC')->first();
 
         if ($ck_nextPage->id > $bookPage->id) {
-            $nextPage = true;
+            $nextPage = BookPageContent::where(['book_id' => $book->id])
+            ->where('id','>',$bookPage->id)
+            // ->orderBy('id', 'DESC')
+            ->first();
         }else{
-            $nextPage=false;
+            $nextPage = null;
         }
-
         $categories = BookCategory::where('status', 1)->get();
-        $bookPage = BookPageContent::where('slug', $slug)->first();
+        // $bookPage = BookPageContent::where('slug', $slug)->first();
         $writers = Writer::where('status', 1)->get();
-        return view('frontend.pages.page_view', compact('writers', 'nextPage','categories', 'bookPage'));
+        return view('frontend.pages.page_view', compact('writers', 'nextPage','categories', 'bookPage','book'));
+        // return view('frontend.pages.page_view', compact('writers', 'nextPage','nextPageDetail','categories', 'bookPage'));
     }
     public function bookPdfDownload($slug)
     {

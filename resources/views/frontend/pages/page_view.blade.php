@@ -28,7 +28,13 @@
                     </div><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
                 <div class="row">
+                    <div class="col-md-12 text-center p-2">
+                        @if ($nextPage)
+                            <a href="{{ route('page_view', ['bookSlug' => $book->slug, 'slug' => $nextPage->slug]) }}"
+                                class="btn btn-primary">Next Page</a>
+                        @endif
 
+                    </div>
                 </div>
             </div><!-- End .container -->
         </div><!-- End .features-section -->
@@ -36,8 +42,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-
-
-    </script>
+    <script></script>
 @endsection
