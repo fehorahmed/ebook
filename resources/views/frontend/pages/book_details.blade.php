@@ -13,6 +13,7 @@
 @endsection
 
 @section('main-content')
+
     <main class="main">
         <div class="features-section bg-gray">
             <div class="container">
@@ -37,7 +38,7 @@
                                 <div class="card mt-1">
                                     <div class="card-header" id="headingOne">
                                         <h2 class="mb-0">
-                                            <a  href="{{ route('page_view', $data->slug) }}" class="btn btn-link btn-block text-left">Page-{{ $loop->iteration }}</a>
+                                            <a  href="{{ route('page_view', ['bookSlug'=>$book->slug,'slug'=>$data->slug]) }}" class="btn btn-link btn-block text-left">{{ $data->content_name }}</a>
                                             {{-- <button class="btn btn-link btn-block text-left" type="button"
                                                 data-toggle="collapse" data-target="#collapse{{ $loop->iteration }}"
                                                 aria-expanded="true" aria-controls="collapseOne">

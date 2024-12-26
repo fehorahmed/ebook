@@ -42,7 +42,7 @@ class BookController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:books,name',
             'status' => 'required',
             'short_description' => 'required',
             'image' => 'required',
@@ -57,7 +57,7 @@ class BookController extends Controller
                 $book->category_id = $request->category_id;
                 $book->writer_id = $request->writer_id;
                 $book->description = $request->short_description;
-                $book->slug = $request->name;
+                $book->slug = Str::slug($request->name,'-');
                 $book->ad_link = $request->ad_link;
                 $book->ad_count = $request->ad_count;
                 $book->ad_coin = $request->ad_coin;
@@ -72,7 +72,7 @@ class BookController extends Controller
                         'book_id' => $book->id,
                         'content_name' => $request->content_name[$counter],
                         'description' => $request->description[$counter],
-                        'slug' => $request->content_name[$counter],
+                        'slug' => Str::slug($request->content_name[$counter],'-'),
                     ]);
                     $counter++;
                 }
@@ -118,7 +118,16 @@ class BookController extends Controller
      */
     public function update(Book $book, Request $request)
     {
-
+        // 'name' => 'required|unique:books,name,except,id',
+        $request->validate([
+            'name' => 'required|unique:books,name,'.$book->id,
+            'status' => 'required',
+            'short_description' => 'required',
+            'image' => 'nullable|image|max:1024',
+            'ad_link' => 'required|string|max:255',
+            'ad_count' => 'required|numeric',
+            'ad_coin' => 'required|numeric',
+        ]);
         try {
             DB::beginTransaction();
 
@@ -126,6 +135,7 @@ class BookController extends Controller
                 $book->category_id = $request->category_id;
                 $book->writer_id = $request->writer_id;
                 $book->description = $request->short_description;
+                $book->slug = Str::slug($request->name,'-');
                 $book->status = $request->status;
                 $book->ad_link = $request->ad_link;
                 $book->ad_count = $request->ad_count;

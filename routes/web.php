@@ -43,7 +43,7 @@ Route::get('category-wise-book/{id}', [HomePageController::class,'categoryWiseBo
 Route::get('writer-wise-book/{id}', [HomePageController::class,'writerWiseBook'])->name('writer_wise_book');
 Route::get('get-book', [HomePageController::class,'getBook'])->name('get_book');
 Route::get('writer-get-book', [HomePageController::class,'writerWiseGetBook'])->name('writer_get_book');
-Route::get('book-page-view/{slug}', [HomePageController::class,'booPageView'])->name('page_view');
+Route::get('book-page/{bookSlug}/{slug}', [HomePageController::class,'booPageView'])->name('page_view');
 Route::get('book-pdf-download/{slug}', [HomePageController::class,'bookPdfDownload'])->name('book_pdf_download');
 
 

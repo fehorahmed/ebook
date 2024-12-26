@@ -166,18 +166,37 @@ class HomePageController extends Controller
         $writers = Writer::where('status', 1)->get();
         return view('frontend.pages.customer_book_page', compact('writers', 'categories'));
     }
-    public function booPageView($slug)
+    public function booPageView($bookSlug, $slug)
     {
+
+        $book = Book::where('slug', $bookSlug)->first();
+        if (!$book) {
+            session()->flash('error', 'Book not found.');
+            return redirect()->back();
+        }
+        $bookPage = BookPageContent::where(['book_id' => $book->id, 'slug' => $slug])->first();
+        if (!$bookPage) {
+            session()->flash('error', 'Page not found.');
+            return redirect()->back();
+        }
+        $ck_nextPage = BookPageContent::where(['book_id' => $book->id])->orderBy('id', 'DESC')->first();
+
+        if ($ck_nextPage->id > $bookPage->id) {
+            $nextPage = true;
+        }else{
+            $nextPage=false;
+        }
+
         $categories = BookCategory::where('status', 1)->get();
         $bookPage = BookPageContent::where('slug', $slug)->first();
         $writers = Writer::where('status', 1)->get();
-        return view('frontend.pages.page_view', compact('writers', 'categories','bookPage'));
+        return view('frontend.pages.page_view', compact('writers', 'nextPage','categories', 'bookPage'));
     }
     public function bookPdfDownload($slug)
     {
         $categories = BookCategory::where('status', 1)->get();
         $bookPage = BookPageContent::where('slug', $slug)->first();
         $writers = Writer::where('status', 1)->get();
-        return view('frontend.pages.page_view', compact('writers', 'categories','bookPage'));
+        return view('frontend.pages.page_view', compact('writers', 'categories', 'bookPage'));
     }
 }
