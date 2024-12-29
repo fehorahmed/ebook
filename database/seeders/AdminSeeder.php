@@ -17,7 +17,7 @@ class AdminSeeder extends Seeder
             'name'          => 'Admin',
             'email'         => 'admin@dev.com',
             'password'      => bcrypt('admin1234'),
-            'user_type' => 'admin',
+            'user_type'     => 'admin',
             'email_verified_at' => \Carbon\Carbon::now()
         ]);
     }
