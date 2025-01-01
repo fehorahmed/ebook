@@ -26,11 +26,11 @@
                             <p>{!! $book->description ?? ''!!}</p>
                         </div>
 
-                        <a href="{{ route('book_download', ($book->slug)) }}" id="download_id"
+                        {{-- <a href="{{ route('book_download', ($book->slug)) }}" id="download_id"
                             class="btn btn-success btn-sm">Download
                             Pdf</a>
                         <a href="{{ route('book_gift_coin', ($book->slug)) }}" id="gift_coin_id"
-                            class="btn btn-success btn-sm">Get Coin</a>
+                            class="btn btn-success btn-sm">Get Coin</a> --}}
 
                          <div class="accordion" id="accordionExample">
                             @foreach ($bookPage as $data)

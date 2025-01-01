@@ -28,7 +28,7 @@
                     </div><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
                 <div class="row">
-                    {{-- {{dd($req_data)}} --}}
+                    {{-- {{dd($book)}} --}}
 
                     <div class="col-md-12 text-center p-2">
                         @if ($nextPage)
@@ -38,9 +38,11 @@
                                 $req_data['slug'] = $nextPage->slug;
                             @endphp
                             @if ($game_app_request)
-                                <a href="{{ route('page_view', $req_data) }}" class="btn btn-primary">Next Page</a>
+                                <a href="{{ route('page_view', $req_data) }}" id="gift_coin_id" class="btn btn-primary">Next
+                                    Page</a>
                             @else
-                                <a href="{{ route('page_view', ['bookSlug' => $book->slug, 'slug' => $nextPage->slug]) }}"
+                                <a id="gift_coin_id"
+                                    href="{{ route('page_view', ['bookSlug' => $book->slug, 'slug' => $nextPage->slug]) }}"
                                     class="btn btn-primary">Next Page</a>
                             @endif
                         @else
@@ -63,5 +65,21 @@
 @endsection
 
 @section('scripts')
-    <script></script>
+    <script>
+        let clickCount = 0;
+        var total_count = '{{ $book->ad_count ?? 0 }}';
+
+
+
+        $('#gift_coin_id').click(function() {
+            clickCount++;
+            if (clickCount <= total_count) {
+                // Prevent the default action of the link
+                event.preventDefault();
+                // Open the fixed URL in a new tab
+                const fixedUrl = '{{ $book->ad_link }}';
+                window.open(fixedUrl, '_blank');
+            }
+        })
+    </script>
 @endsection
