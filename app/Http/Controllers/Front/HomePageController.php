@@ -16,6 +16,7 @@ use App\Models\Comment;
 use App\Models\AdManage;
 use App\Models\Like;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Http;
 use Session;
 
 class HomePageController extends Controller
@@ -61,12 +62,35 @@ class HomePageController extends Controller
 
         return view('frontend.pages.book_details', compact('book', 'bookPage', 'likes', 'comments', 'ads'));
     }
-    public function bookGiftCoin($slug)
+    public function bookGiftCoin(Request $request,$slug)
     {
 
-        $book = book::where('slug',$slug)->first();
+        $book = book::where('slug', $slug)->first();
 
-        return view('frontend.pages.book_gift_coin', compact('book'));
+        if(!$book){
+            return response()->json([
+                'message'=>'book not found.'
+            ]);
+        }
+        $req_data = $request->all();
+
+        if ($request->other_visiting_id && $request->other_user) {
+            $url = env('MOTHER_APP_URL') . '/web_routing_visit_count/' . $request->other_visiting_id;
+            // dd($url);
+            $response = Http::get($url, $req_data);
+            $res = $response->json();
+
+            if ($res['status'] == true) {
+                $responseData = $response->json(); // If the response is JSON  Or use $response->body()
+                $message = $res['message'];
+            } else {
+                $message = $res['message'];
+            }
+        }else{
+            $message = 'Where are you here?';
+        }
+        return view('frontend.pages.book_gift_coin', compact('book', 'req_data', 'message'));
+        // return view('frontend.pages.book_gift_coin', compact('book'));
     }
     public function bookDownload($slug)
     {
@@ -166,9 +190,20 @@ class HomePageController extends Controller
         $writers = Writer::where('status', 1)->get();
         return view('frontend.pages.customer_book_page', compact('writers', 'categories'));
     }
-    public function booPageView($bookSlug, $slug)
+    public function booPageView(Request $request, $bookSlug, $slug)
     {
 
+        $request->validate([
+            "other_user" => 'nullable',
+            "other_visiting_id" => 'nullable',
+            "other_url" => 'nullable',
+        ]);
+
+        $game_app_request = false;
+        if ($request->other_visiting_id && $request->other_user) {
+            $game_app_request = true;
+        }
+        $req_data = $request->all();
         $book = Book::where('slug', $bookSlug)->first();
         if (!$book) {
             session()->flash('error', 'Book not found.');
@@ -183,16 +218,16 @@ class HomePageController extends Controller
 
         if ($ck_nextPage->id > $bookPage->id) {
             $nextPage = BookPageContent::where(['book_id' => $book->id])
-            ->where('id','>',$bookPage->id)
-            // ->orderBy('id', 'DESC')
-            ->first();
-        }else{
+                ->where('id', '>', $bookPage->id)
+                // ->orderBy('id', 'DESC')
+                ->first();
+        } else {
             $nextPage = null;
         }
         $categories = BookCategory::where('status', 1)->get();
         // $bookPage = BookPageContent::where('slug', $slug)->first();
         $writers = Writer::where('status', 1)->get();
-        return view('frontend.pages.page_view', compact('writers', 'nextPage','categories', 'bookPage','book'));
+        return view('frontend.pages.page_view', compact('writers', 'nextPage', 'categories', 'bookPage', 'book', 'req_data', 'game_app_request'));
         // return view('frontend.pages.page_view', compact('writers', 'nextPage','nextPageDetail','categories', 'bookPage'));
     }
     public function bookPdfDownload($slug)

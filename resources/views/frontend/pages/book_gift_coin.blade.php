@@ -23,7 +23,8 @@
                             class="rounded mx-auto d-block" alt="" height="400" width="400">
                         <div class="text-center mt-2">
                             <p >{!! $book->name !!}</p>
-                            <h4>You have successfully get {{$book->ad_coin}} coin.</h4>
+                            {{-- <h4>You have successfully get {{$book->ad_coin}} coin.</h4> --}}
+                            <h4>{{$message}} </h4>
                         </div>
 
 
