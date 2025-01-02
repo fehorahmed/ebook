@@ -32,27 +32,30 @@
 
                     <div class="col-md-12 text-center p-2">
                         @if ($nextPage)
+                            <span id="countdown_timer" class="countdown-text">Next Page in 30s</span>
                             @php
 
                                 $req_data['bookSlug'] = $book->slug;
                                 $req_data['slug'] = $nextPage->slug;
                             @endphp
                             @if ($game_app_request)
-                                <a href="{{ route('page_view', $req_data) }}" id="gift_coin_id" class="btn btn-primary">Next
+                                <a style="display: none;" href="{{ route('page_view', $req_data) }}" id="gift_coin_id"
+                                    class="btn btn-primary">Next
                                     Page</a>
                             @else
-                                <a id="gift_coin_id"
+                                <a style="display: none;" id="gift_coin_id"
                                     href="{{ route('page_view', ['bookSlug' => $book->slug, 'slug' => $nextPage->slug]) }}"
                                     class="btn btn-primary">Next Page</a>
                             @endif
                         @else
                             @if ($game_app_request)
-                                <a href="{{ route('book_gift_coin', [
-                                    'slug' => $book->slug,
-                                    'other_user' => isset($req_data['other_user']) ? $req_data['other_user'] : null,
-                                    'other_visiting_id' => isset($req_data['other_visiting_id']) ? $req_data['other_visiting_id'] : null,
-                                    'other_url' => isset($req_data['other_url']) ? $req_data['other_url'] : null,
-                                ]) }}"
+                                <a style="display: none;"
+                                    href="{{ route('book_gift_coin', [
+                                        'slug' => $book->slug,
+                                        'other_user' => isset($req_data['other_user']) ? $req_data['other_user'] : null,
+                                        'other_visiting_id' => isset($req_data['other_visiting_id']) ? $req_data['other_visiting_id'] : null,
+                                        'other_url' => isset($req_data['other_url']) ? $req_data['other_url'] : null,
+                                    ]) }}"
                                     id="gift_coin_id" class="btn btn-success btn-sm">Get Coin</a>
                             @endif
                         @endif
@@ -81,5 +84,25 @@
                 window.open(fixedUrl, '_blank');
             }
         })
+        $(document).ready(function() {
+            // Total countdown time in seconds
+            let countdown = 30;
+
+            // Function to update the countdown text
+            function updateCountdown() {
+                if (countdown > 0) {
+                    $('#countdown_timer').text(`Next Page in ${countdown}s`); // Update countdown text
+                    countdown--;
+                } else {
+                    clearInterval(timer); // Stop the countdown timer
+                    $('#countdown_timer').hide(); // Hide the countdown text
+                    $('#gift_coin_id').fadeIn(); // Show the button
+                }
+            }
+
+            // Start the countdown
+            updateCountdown(); // Initialize countdown
+            var timer = setInterval(updateCountdown, 1000); // Update countdown every second
+        });
     </script>
 @endsection
