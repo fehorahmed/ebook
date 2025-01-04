@@ -102,7 +102,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container"> <!-- centers Navbar elements in a container -->
 
-                <a class="navbar-brand" href="/">e-Library</a>
+                <a class="navbar-brand" href="/">{{env('APP_NAME','e-Library')}}</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
