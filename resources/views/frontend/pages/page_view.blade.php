@@ -52,6 +52,7 @@
                             @endif
                         @else
                             @if ($game_app_request)
+                                <span id="countdown_timer" class="countdown-text">Next Page in 30s</span>
                                 <a style="display: none;"
                                     href="{{ route('book_gift_coin', [
                                         'slug' => $book->slug,
