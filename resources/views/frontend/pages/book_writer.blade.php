@@ -57,6 +57,9 @@
     <div class="features-section bg-gray">
         <div class="container">
             <h5 class="subtitle"><a href="{{ route('home') }}">লাইব্রেরি</a> » লেখক</h5>
+            <script>
+                {{ $adShow->writer_page_ad_one ?? '' }}
+            </script>
             <div class="row mt-5">
                 @foreach ($writers as $writer)
                     <div class="col-lg-3">
@@ -70,6 +73,18 @@
                     </div><!-- End .col-lg-3 -->
                 @endforeach
             </div><!-- End .row -->
+            <script>
+                {{ $adShow->writer_page_ad_two ?? '' }}
+            </script>
+            <script>
+                {{ $adShow->writer_page_ad_three ?? '' }}
+            </script>
+            <script>
+                {{ $adShow->writer_page_ad_four ?? '' }}
+            </script>
+            <script>
+                {{ $adShow->writer_page_ad_five ?? '' }}
+            </script>
         </div><!-- End .container -->
     </div><!-- End .features-section -->
 
