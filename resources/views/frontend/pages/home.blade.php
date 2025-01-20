@@ -76,6 +76,9 @@
     <section class="new-products-section">
         <div class="container">
             <h4>সাম্প্রতিক বই</h4>
+            <script>
+                {{ $adShow->home_page_ad_one ?? '' }}
+            </script>
            <div class="row">
                 @foreach ($books as $book)
                     <div class="col-md-2">
@@ -158,6 +161,18 @@
                 @endforeach
             </div><!-- End .row -->
         </div><!-- End .container -->
+        <script>
+            {{ $adShow->home_page_ad_two ?? '' }}
+        </script>
+        <script>
+            {{ $adShow->home_page_ad_three ?? '' }}
+        </script>
+        <script>
+            {{ $adShow->home_page_ad_four ?? '' }}
+        </script>
+        <script>
+            {{ $adShow->home_page_ad_five ?? '' }}
+        </script>
     </section>
 </main>
 @endsection

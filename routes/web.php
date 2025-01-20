@@ -96,6 +96,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
         Route::resource('writers', WriterController::class);
         Route::resource('book', BookController::class);
         // sa
+
+        Route::get('ad/setting', [SettingController::class, 'adSetting'])->name('ad_setting');
+        Route::post('ad/setting/store', [SettingController::class, 'adSettingCreateOrUpdate'])->name('ad_setting.store');
+        Route::post('home/page/ad/setting/store', [SettingController::class, 'homePageAdSettingCreateOrUpdate'])->name('home_page_ad_setting.store');
+        Route::post('category/page/ad/setting/store', [SettingController::class, 'categoryPageAdSettingCreateOrUpdate'])->name('category_page_ad_setting.store');
+        Route::post('writer/page/ad/setting/store', [SettingController::class, 'writerPageAdSettingCreateOrUpdate'])->name('writer_page_ad_setting.store');
+        Route::post('single/page/ad/setting/store', [SettingController::class, 'singlePageAdSettingCreateOrUpdate'])->name('single_page_ad_setting.store');
     });
 
 

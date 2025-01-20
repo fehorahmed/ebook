@@ -18,6 +18,9 @@
             <div class="container">
                 <h5 class="subtitle"><a href="{{ route('home') }}">লাইব্রেরি</a> » বইয়ের পেজ</h5>
                 <div class="row mt-5">
+                    <script>
+                        {{ $adShow->single_page_ad_one ?? '' }}
+                    </script>
                     <div class="col-lg-8 mx-auto">
                         <div>
                             <h4>{{ $bookPage->content_name ?? '' }}</h4>
@@ -63,6 +66,18 @@
 
                     </div>
                 </div>
+                <script>
+                    {{ $adShow->single_page_ad_two ?? '' }}
+                </script>
+                <script>
+                    {{ $adShow->single_page_ad_three ?? '' }}
+                </script>
+                <script>
+                    {{ $adShow->single_page_ad_four ?? '' }}
+                </script>
+                <script>
+                    {{ $adShow->single_page_ad_five ?? '' }}
+                </script>
             </div><!-- End .container -->
         </div><!-- End .features-section -->
     </main>

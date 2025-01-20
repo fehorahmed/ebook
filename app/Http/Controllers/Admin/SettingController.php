@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Footer;
-use App\Models\PricingSetting;
-use App\Models\Setting;
-use App\Models\Social;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\DB;
 use Image;
+use App\Models\Footer;
+use App\Models\Social;
+use App\Models\Setting;
+use App\Models\AdSetting;
+use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Models\PricingSetting;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
@@ -185,81 +186,125 @@ class SettingController extends Controller
         $social = Social::first();
         return view('backend.dashboard.admin.socials.social', compact('social'));
     }
-    public function socialStore(Request $request){
-        try {
-            DB::beginTransaction();
 
-            $content_exist = Social::first();
-            if ($content_exist) {
-                $content_exist->facebook = $request->facebook;
-                $content_exist->instagram = $request->instagram;
-                $content_exist->twitter = $request->twitter;
-                $content_exist->youtube = $request->youtube;
-                $content_exist->tiktok = $request->tiktok;
-                $content_exist->linkedin = $request->linkedin;
-                $content_exist->save();
-            } else {
-                $social = new Social();
-                $social->facebook = $request->facebook;
-                $social->instagram = $request->instagram;
-                $social->twitter = $request->twitter;
-                $social->youtube = $request->youtube;
-                $social->tiktok = $request->tiktok;
-                $social->linkedin = $request->linkedin;
-                $social->save();
-            }
 
-            DB::commit();
-            session()->flash('success', 'Social has been updated successfully !!');
-            return redirect()->route('social');
-        } catch (\Exception $e) {
-            session()->flash('sticky_error', $e->getMessage());
-            DB::rollBack();
-            return back();
-        }
+    public function adSetting(){
+        $adCheck = AdSetting::first();
+        return view('backend.dashboard.admin.ad_setting.add',compact('adCheck'));
     }
 
-    public function pricing(){
-        $pricing = PricingSetting::first();
-        return view('backend.dashboard.admin.pricing_setting.pricing', compact('pricing'));
+    public function adSettingCreateOrUpdate(Request $request){
+        $adCheck = AdSetting::first();
+        if($adCheck){
+            $adCheck->update([
+                'details_page_ad_one' => $request->details_page_ad_one,
+                'details_page_ad_two' => $request->details_page_ad_two,
+                'details_page_ad_three' => $request->details_page_ad_three,
+                'details_page_ad_four' => $request->details_page_ad_four,
+                'details_page_ad_five' => $request->details_page_ad_five,
+                'details_page_ad_six' => $request->details_page_ad_six,
+            ]);
+        }else{
+            AdSetting::create([
+                'details_page_ad_one' => $request->details_page_ad_one,
+                'details_page_ad_two' => $request->details_page_ad_two,
+                'details_page_ad_three' => $request->details_page_ad_three,
+                'details_page_ad_four' => $request->details_page_ad_four,
+                'details_page_ad_five' => $request->details_page_ad_five,
+                'details_page_ad_six' => $request->details_page_ad_six,
+            ]);
+        }
+        session()->flash('success', 'Ad Updated Successfully!');
+        return redirect()->back();
     }
 
-    public function pricingStore(Request $request){
-        $request->validate([
-            'basic_video_per_minute_price' => 'required|numeric',
-            'pro_animation_video_per_minute_price' => 'required|numeric',
-            'youtube_video_per_minute_price' => 'required|numeric',
-            'fast_delivery_price' => 'required|numeric',
-            'corporate_video_per_minute_price' => 'required|numeric',
-        ]);
-        try {
-            DB::beginTransaction();
-
-            $content_exist = PricingSetting::first();
-            if ($content_exist) {
-                $content_exist->basic_video_per_minute_price = $request->basic_video_per_minute_price;
-                $content_exist->pro_animation_video_per_minute_price = $request->pro_animation_video_per_minute_price;
-                $content_exist->youtube_video_per_minute_price = $request->youtube_video_per_minute_price;
-                $content_exist->fast_delivery_price = $request->fast_delivery_price;
-                $content_exist->corporate_video_per_minute_price = $request->corporate_video_per_minute_price;
-                $content_exist->save();
-            } else {
-                $pricing_setting = new PricingSetting();
-                $pricing_setting->basic_video_per_minute_price = $request->basic_video_per_minute_price;
-                $pricing_setting->pro_animation_video_per_minute_price = $request->pro_animation_video_per_minute_price;
-                $pricing_setting->youtube_video_per_minute_price = $request->youtube_video_per_minute_price;
-                $pricing_setting->fast_delivery_price = $request->fast_delivery_price;
-                $pricing_setting->corporate_video_per_minute_price = $request->corporate_video_per_minute_price;
-                $pricing_setting->save();
-            }
-
-            DB::commit();
-            session()->flash('success', 'Pricing has been updated successfully !!');
-            return redirect()->route('pricing_setting');
-        } catch (\Exception $e) {
-            session()->flash('sticky_error', $e->getMessage());
-            DB::rollBack();
-            return back();
+    public function homePageAdSettingCreateOrUpdate(Request $request){
+        $adCheck = AdSetting::first();
+        if($adCheck){
+            $adCheck->update([
+                'home_page_ad_one' => $request->home_page_ad_one,
+                'home_page_ad_two' => $request->home_page_ad_two,
+                'home_page_ad_three' => $request->home_page_ad_three,
+                'home_page_ad_four' => $request->home_page_ad_four,
+                'home_page_ad_five' => $request->home_page_ad_five,
+            ]);
+        }else{
+            AdSetting::create([
+                'home_page_ad_one' => $request->home_page_ad_one,
+                'home_page_ad_two' => $request->home_page_ad_two,
+                'home_page_ad_three' => $request->home_page_ad_three,
+                'home_page_ad_four' => $request->home_page_ad_four,
+                'home_page_ad_five' => $request->home_page_ad_five,
+            ]);
         }
+        session()->flash('success', 'Home Page Ad Updated Successfully!');
+        return redirect()->back();
+    }
+    public function categoryPageAdSettingCreateOrUpdate(Request $request){
+        $adCheck = AdSetting::first();
+        if($adCheck){
+            $adCheck->update([
+                'category_page_ad_one' => $request->category_page_ad_one,
+                'category_page_ad_two' => $request->category_page_ad_two,
+                'category_page_ad_three' => $request->category_page_ad_three,
+                'category_page_ad_four' => $request->category_page_ad_four,
+                'category_page_ad_five' => $request->category_page_ad_five,
+            ]);
+        }else{
+            AdSetting::create([
+                'category_page_ad_one' => $request->category_page_ad_one,
+                'category_page_ad_two' => $request->category_page_ad_two,
+                'category_page_ad_three' => $request->category_page_ad_three,
+                'category_page_ad_four' => $request->category_page_ad_four,
+                'category_page_ad_five' => $request->category_page_ad_five,
+            ]);
+        }
+        session()->flash('success', 'Catgory Page Ad Updated Successfully!');
+        return redirect()->back();
+    }
+    public function writerPageAdSettingCreateOrUpdate(Request $request){
+        $adCheck = AdSetting::first();
+        if($adCheck){
+            $adCheck->update([
+                'writer_page_ad_one' => $request->writer_page_ad_one,
+                'writer_page_ad_two' => $request->writer_page_ad_two,
+                'writer_page_ad_three' => $request->writer_page_ad_three,
+                'writer_page_ad_four' => $request->writer_page_ad_four,
+                'writer_page_ad_five' => $request->writer_page_ad_five,
+            ]);
+        }else{
+            AdSetting::create([
+                'writer_page_ad_one' => $request->writer_page_ad_one,
+                'writer_page_ad_two' => $request->writer_page_ad_two,
+                'writer_page_ad_three' => $request->writer_page_ad_three,
+                'writer_page_ad_four' => $request->writer_page_ad_four,
+                'writer_page_ad_five' => $request->writer_page_ad_five,
+            ]);
+        }
+        session()->flash('success', 'Writer Page Ad Updated Successfully!');
+        return redirect()->back();
+    }
+
+    public function singlePageAdSettingCreateOrUpdate(Request $request){
+        $adCheck = AdSetting::first();
+        if($adCheck){
+            $adCheck->update([
+                'single_page_ad_one' => $request->single_page_ad_one,
+                'single_page_ad_two' => $request->single_page_ad_two,
+                'single_page_ad_three' => $request->single_page_ad_three,
+                'single_page_ad_four' => $request->single_page_ad_four,
+                'single_page_ad_five' => $request->single_page_ad_five,
+            ]);
+        }else{
+            AdSetting::create([
+                'single_page_ad_one' => $request->single_page_ad_one,
+                'single_page_ad_two' => $request->single_page_ad_two,
+                'single_page_ad_three' => $request->single_page_ad_three,
+                'single_page_ad_four' => $request->single_page_ad_four,
+                'single_page_ad_five' => $request->single_page_ad_five,
+            ]);
+        }
+        session()->flash('success', 'Single Page Ad Updated Successfully!');
+        return redirect()->back();
     }
 }
