@@ -161,18 +161,16 @@
                 @endforeach
             </div><!-- End .row -->
         </div><!-- End .container -->
-        <script>
-            {{ $adShow->home_page_ad_two ?? '' }}
-        </script>
-        <script>
-            {{ $adShow->home_page_ad_three ?? '' }}
-        </script>
-        <script>
-            {{ $adShow->home_page_ad_four ?? '' }}
-        </script>
-        <script>
-            {{ $adShow->home_page_ad_five ?? '' }}
-        </script>
+
+            {!! $adShow->home_page_ad_two ?? '' !!}
+
+
+            {!! $adShow->home_page_ad_three ?? '' !!}
+
+            {!! $adShow->home_page_ad_four ?? '' !!}
+
+            {!! $adShow->home_page_ad_five ?? '' !!}
+
     </section>
 </main>
 @endsection

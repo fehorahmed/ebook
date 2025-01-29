@@ -58,9 +58,9 @@
     <div class="features-section bg-gray">
         <div class="container">
             <h5 class="subtitle"><a href="{{ route('home') }}">লাইব্রেরি</a> » বইয়ের ধরণ</h5>
-            <script>
-                {{ $adShow->category_page_ad_one ?? '' }}
-            </script>
+
+                {!! $adShow->category_page_ad_one ?? '' !!}
+
             <div class="row mt-5">
                 @foreach ($categories as $category)
                     <div class="col-lg-3">
@@ -74,18 +74,15 @@
                     </div><!-- End .col-lg-3 -->
                 @endforeach
             </div><!-- End .row -->
-            <script>
-                {{ $adShow->category_page_ad_two ?? '' }}
-            </script>
-            <script>
-                {{ $adShow->category_page_ad_three ?? '' }}
-            </script>
-            <script>
-                {{ $adShow->category_page_ad_four ?? '' }}
-            </script>
-            <script>
-                {{ $adShow->category_page_ad_five ?? '' }}
-            </script>
+
+                {!! $adShow->category_page_ad_two ?? '' !!}
+
+                {!! $adShow->category_page_ad_three ?? '' !!}
+
+                {!! $adShow->category_page_ad_four ?? '' !!}
+
+                {!! $adShow->category_page_ad_five ?? '' !!}
+
         </div><!-- End .container -->
     </div><!-- End .features-section -->
 
