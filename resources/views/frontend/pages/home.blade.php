@@ -94,6 +94,7 @@
                 @endforeach
            </div>
         </div>
+        {!! $adShow->writer_page_ad_one ?? '' !!}
         <div class="container">
             <h4>জনপ্রিয় বই</h4>
            <div class="row">
@@ -111,6 +112,7 @@
                 @endforeach
            </div>
         </div>
+        {!! $adShow->home_page_ad_three ?? '' !!}
         <div class="container">
             <h4>সেবা প্রকাশনী</h4>
            <div class="row">
@@ -128,6 +130,7 @@
                 @endforeach
            </div>
         </div>
+        {!! $adShow->home_page_ad_three ?? '' !!}
         <div class="container">
             <h4>ইসলামিক বই</h4>
            <div class="row">
@@ -145,6 +148,7 @@
                 @endforeach
            </div>
         </div>
+        {!! $adShow->home_page_ad_three ?? '' !!}
         <div class="container">
             <h4>বইয়ের ধরণ</h4>
             <div class="row mt-5">
@@ -163,9 +167,6 @@
         </div><!-- End .container -->
 
             {!! $adShow->home_page_ad_two ?? '' !!}
-
-
-            {!! $adShow->home_page_ad_three ?? '' !!}
 
             {!! $adShow->home_page_ad_four ?? '' !!}
 
