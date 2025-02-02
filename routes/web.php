@@ -116,6 +116,9 @@ Route::get('/linkstorage', function () {
 Route::get('/migrate', function () {
     Artisan::call('migrate');
 });
+Route::get('/migrate-seed', function () {
+    Artisan::call('migrate --seed');
+});
 Route::get('/optimize', function () {
     Artisan::call('optimize');
 });
