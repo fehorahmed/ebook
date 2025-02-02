@@ -48,10 +48,9 @@
                                         <label class="control-label" for="category_id">Category <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" id="category_id" name="category_id">
-                                            <option value="" selected>--Select Category--</option>
+                                            <option value="">--Select Category--</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}"
-                                                    @if (old('category_id') == $category->id) selected @endif>
+                                                <option value="{{ $category->id }}" {{old('category_id') == $category->id ?'selected':''}}>
                                                     {{ $category->name ?? '' }}</option>
                                             @endforeach
                                             @error('category_id')
@@ -66,10 +65,9 @@
                                         <label class="control-label" for="status">Writer <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" id="writer_id" name="writer_id">
-                                            <option value="" selected>--Select Writer--</option>
+                                            <option value="">--Select Writer--</option>
                                             @foreach ($writers as $writer)
-                                                <option value="{{ $writer->id }}"
-                                                    @if (old('writer_id') == $writer->id) selected @endif>
+                                                <option value="{{ $writer->id }}" {{old('writer_id') == $writer->id ?'selected':''}}>
                                                     {{ $writer->name ?? '' }}</option>
                                             @endforeach
                                             @error('writer_id')
@@ -83,7 +81,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Name</label>
-                                        <input type="text" name="name" value="" id="name"
+                                        <input type="text" name="name" value="{{old('name')}}" id="name"
                                             class="form-control">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -95,10 +93,10 @@
                                         <label class="control-label" for="status">Status <span
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" id="status" name="status">
-                                            <option value="" selected>--Select Status--</option>
-                                            <option value="1" @if (old('status') == '1') selected @endif> Active
+                                            <option value="">--Select Status--</option>
+                                            <option value="1" {{old('status') == '1' ?'selected':''}}> Active
                                             </option>
-                                            <option value="0" @if (old('status') == '0') selected @endif>
+                                            <option value="0" {{old('status') == '0' ?'selected':''}}>
                                                 Inactive</option>
                                             @error('status')
                                                 <span class="text-danger">{{ $message }}</span>
