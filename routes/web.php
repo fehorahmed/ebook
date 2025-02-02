@@ -119,6 +119,9 @@ Route::get('/migrate', function () {
 Route::get('/migrate-seed', function () {
     Artisan::call('migrate --seed');
 });
+Route::get('/migrate-fresh', function () {
+    Artisan::call('migrate:fresh --seed');
+});
 Route::get('/optimize', function () {
     Artisan::call('optimize');
 });
