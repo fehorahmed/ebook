@@ -193,10 +193,7 @@
                 </div>
             </div>
 
-
-
-
-            {!! $adShow->home_page_ad_five ?? '' !!}
+            {{-- {!! $adShow->home_page_ad_five ?? '' !!} --}}
 
         </section>
     </main>
