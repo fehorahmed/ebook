@@ -95,7 +95,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 d-md-hide d-sm-hide">
                     {!! $adShow->home_page_ad_one ?? '' !!}
                 </div>
             </div>
