@@ -109,3 +109,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     Route::post('/logout', [UserController::class, 'adminLogout'])->name('admin-logout');
 });
 
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+});
+Route::get('/optimize', function () {
+    Artisan::call('optimize');
+});

@@ -227,6 +227,7 @@ class SettingController extends Controller
                 'home_page_ad_three' => $request->home_page_ad_three,
                 'home_page_ad_four' => $request->home_page_ad_four,
                 'home_page_ad_five' => $request->home_page_ad_five,
+                'home_page_ad_six' => $request->home_page_ad_six,
             ]);
         }else{
             AdSetting::create([
@@ -235,6 +236,7 @@ class SettingController extends Controller
                 'home_page_ad_three' => $request->home_page_ad_three,
                 'home_page_ad_four' => $request->home_page_ad_four,
                 'home_page_ad_five' => $request->home_page_ad_five,
+                'home_page_ad_six' => $request->home_page_ad_six,
             ]);
         }
         session()->flash('success', 'Home Page Ad Updated Successfully!');

@@ -23,7 +23,7 @@
 @endsection
 @section('admin-content')
 <section>
-    <div class="row">
+    {{-- <div class="row">
         <div class="card">
             <div class="card-header pb-0">
                 <div class="row">
@@ -85,15 +85,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="" class="form-label">Banner 728x90</label>
-                                    <input type="text" name="details_page_ad_six" value="{{ old('details_page_ad_six', $adCheck->details_page_ad_six ?? '' ) }}" id="details_page_ad_six" class="form-control">
-                                    @error('details_page_ad_six')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+
                         </div>
 
                        <div class="row">
@@ -108,7 +100,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="row mt-2">
         <div class="card">
             <div class="card-header pb-0">
@@ -171,6 +163,15 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="" class="form-label">Banner 728x90</label>
+                                    <input type="text" name="home_page_ad_six" value="{{ old('home_page_ad_six', $adCheck->home_page_ad_six ?? '' ) }}" id="home_page_ad_six" class="form-control">
+                                    @error('home_page_ad_six')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                        <div class="row">
@@ -186,7 +187,7 @@
             </div>
         </div>
     </div>
-    <div class="row mt-2">
+    {{-- <div class="row mt-2">
         <div class="card">
             <div class="card-header pb-0">
                 <div class="row">
@@ -416,7 +417,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </section>
 
 
