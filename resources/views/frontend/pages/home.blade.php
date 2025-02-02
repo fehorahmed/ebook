@@ -61,8 +61,6 @@
             }
         }
 
-
-
         @media only screen and (max-width: 400px) {
             .new-products-section .container .col-md-2 {
                 width: 100% !important;

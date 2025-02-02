@@ -17,10 +17,13 @@
         <div class="features-section bg-gray">
             <div class="container">
                 <h5 class="subtitle"><a href="{{ route('home') }}">লাইব্রেরি</a> » বইয়ের পেজ</h5>
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! $adShow->home_page_ad_one ?? '' !!}
+                    </div>
+                </div>
+
                 <div class="row mt-5">
-
-                    {!! $adShow->single_page_ad_one ?? '' !!}
-
                     <div class="col-lg-8 mx-auto">
                         <div>
                             <h4>{{ $bookPage->content_name ?? '' }}</h4>
@@ -67,13 +70,20 @@
                     </div>
                 </div>
 
-                {!! $adShow->single_page_ad_two ?? '' !!}
-
-                {!! $adShow->single_page_ad_three ?? '' !!}
-
-                {!! $adShow->single_page_ad_four ?? '' !!}
-
-                {!! $adShow->single_page_ad_five ?? '' !!}
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! $adShow->home_page_ad_two ?? '' !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! $adShow->home_page_ad_four ?? '' !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! $adShow->home_page_ad_two ?? '' !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! $adShow->home_page_ad_four ?? '' !!}
+                    </div>
+                </div>
 
             </div><!-- End .container -->
         </div><!-- End .features-section -->

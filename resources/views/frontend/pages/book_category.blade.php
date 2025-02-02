@@ -17,7 +17,7 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
         }
 
         @media only screen and (max-width: 1200px) {
@@ -37,56 +37,68 @@
             }
 
         }
+
         @media only screen and (max-width: 550px) {
             .container .col-lg-3 {
                 min-width: 50% !important;
                 max-width: 50% !important;
             }
         }
+
         @media only screen and (max-width: 400px) {
             .container .col-lg-3 {
                 min-width: 100% !important;
                 max-width: 100% !important;
             }
         }
-
     </style>
 @endsection
 
 @section('main-content')
-<main class="main">
-    <div class="features-section bg-gray">
-        <div class="container">
-            <h5 class="subtitle"><a href="{{ route('home') }}">লাইব্রেরি</a> » বইয়ের ধরণ</h5>
+    <main class="main">
+        <div class="features-section bg-gray">
+            <div class="container">
+                <h5 class="subtitle"><a href="{{ route('home') }}">লাইব্রেরি</a> » বইয়ের ধরণ</h5>
 
-                {!! $adShow->category_page_ad_one ?? '' !!}
+                <div class="row">
+                    <div class="col-md-12">
+                        {!! $adShow->home_page_ad_one ?? '' !!}
+                    </div>
+                </div>
 
-            <div class="row mt-5">
-                @foreach ($categories as $category)
-                    <div class="col-lg-3">
-                           <a href="{{ route('category_wise_book', encrypt($category->id)) }}">
+                <div class="row mt-5">
+                    @foreach ($categories as $category)
+                        <div class="col-lg-3">
+                            <a href="{{ route('category_wise_book', encrypt($category->id)) }}">
                                 <div class="card card_height shadow">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">{{ $category->name ?? '' }}</h5>
                                     </div>
                                 </div>
-                           </a>
-                    </div><!-- End .col-lg-3 -->
-                @endforeach
-            </div><!-- End .row -->
+                            </a>
+                        </div><!-- End .col-lg-3 -->
+                    @endforeach
+                </div><!-- End .row -->
 
-                {!! $adShow->category_page_ad_two ?? '' !!}
+                <div class="row">
+                    <div class="col-md-4">
+                        {!! $adShow->home_page_ad_two ?? '' !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! $adShow->home_page_ad_four ?? '' !!}
+                    </div>
+                    <div class="col-md-4">
+                        {!! $adShow->home_page_ad_two ?? '' !!}
+                    </div>
+                    <div class="col-md-2">
+                        {!! $adShow->home_page_ad_four ?? '' !!}
+                    </div>
+                </div>
 
-                {!! $adShow->category_page_ad_three ?? '' !!}
+            </div><!-- End .container -->
+        </div><!-- End .features-section -->
 
-                {!! $adShow->category_page_ad_four ?? '' !!}
-
-                {!! $adShow->category_page_ad_five ?? '' !!}
-
-        </div><!-- End .container -->
-    </div><!-- End .features-section -->
-
-</main>
+    </main>
 @endsection
 
 {{-- @section('scripts')
