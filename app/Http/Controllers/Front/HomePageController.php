@@ -31,13 +31,14 @@ class HomePageController extends Controller
         $popularBooks = Book::orderBy('like_count', 'desc')->with('writer')->take(6)->get();
         $user = User::first();
         $adShow = AdSetting::first();
-        return view('frontend.pages.home', compact('books', 'categoryBooks', 'islamicBooks', 'categories', 'user', 'popularBooks','adShow'));
+        return view('frontend.pages.home', compact('books', 'categoryBooks', 'islamicBooks', 'categories', 'user', 'popularBooks', 'adShow'));
     }
     public function bookCategory()
     {
         $user = User::first();
         $categories = BookCategory::where('status', 1)->get();
-        return view('frontend.pages.book_category', compact('categories', 'user'));
+        $adShow = AdSetting::first();
+        return view('frontend.pages.book_category', compact('categories', 'user', 'adShow'));
     }
     public function bookWriter()
     {
@@ -64,14 +65,14 @@ class HomePageController extends Controller
 
         return view('frontend.pages.book_details', compact('book', 'bookPage', 'likes', 'comments', 'ads'));
     }
-    public function bookGiftCoin(Request $request,$slug)
+    public function bookGiftCoin(Request $request, $slug)
     {
 
         $book = book::where('slug', $slug)->first();
 
-        if(!$book){
+        if (!$book) {
             return response()->json([
-                'message'=>'book not found.'
+                'message' => 'book not found.'
             ]);
         }
         $req_data = $request->all();
@@ -88,7 +89,7 @@ class HomePageController extends Controller
             } else {
                 $message = $res['message'];
             }
-        }else{
+        } else {
             $message = 'Where are you here?';
         }
         return view('frontend.pages.book_gift_coin', compact('book', 'req_data', 'message'));
@@ -115,7 +116,7 @@ class HomePageController extends Controller
         $data = decrypt($id);
         $books = book::where('category_id', $data)->get();
         $adShow = AdSetting::first();
-        return view('frontend.pages.category_wise_book', compact('books', 'user','adShow'));
+        return view('frontend.pages.category_wise_book', compact('books', 'user', 'adShow'));
     }
     public function writerWiseBook(Request $request, $id)
     {
@@ -123,7 +124,7 @@ class HomePageController extends Controller
         $data = decrypt($id);
         $writerWiseBooks = book::where('writer_id', $data)->get();
         $adShow = AdSetting::first();
-        return view('frontend.pages.writer_wise_book', compact('writerWiseBooks', 'user','adShow'));
+        return view('frontend.pages.writer_wise_book', compact('writerWiseBooks', 'user', 'adShow'));
     }
 
     public function getBook(Request $request)
@@ -232,7 +233,7 @@ class HomePageController extends Controller
         // $bookPage = BookPageContent::where('slug', $slug)->first();
         $writers = Writer::where('status', 1)->get();
         $adShow = AdSetting::first();
-        return view('frontend.pages.page_view', compact('writers', 'nextPage', 'categories', 'bookPage', 'book', 'req_data', 'game_app_request','adShow'));
+        return view('frontend.pages.page_view', compact('writers', 'nextPage', 'categories', 'bookPage', 'book', 'req_data', 'game_app_request', 'adShow'));
         // return view('frontend.pages.page_view', compact('writers', 'nextPage','nextPageDetail','categories', 'bookPage'));
     }
     public function bookPdfDownload($slug)
