@@ -142,7 +142,7 @@
 
                                             <td>
                                                 <div class="form-group {{ $errors->has('description.'.$loop->index) ? 'has-error' :'' }}">
-                                                    <textarea class="form-control description summernote" name="description[]" value="{{ old('description.'.$loop->index) }}" name="description[]"></textarea>
+                                                    <textarea class="form-control description summernote" name="description[]" name="description[]">{{ old('description.'.$loop->index) }}</textarea>
                                                 </div>
                                             </td>
                                             <td class="text-center">
@@ -199,7 +199,7 @@
                                     <tr class="product-item-two">
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" name="ad_link" value="{{old('ad_link')}}" class="form-control ad_link" placeholder="Enter Link">
+                                                <input type="text" name="ad_link" value="{{old('ad_link')}}" class="form-control" placeholder="Enter Link">
                                                 @error('ad_link')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -271,19 +271,6 @@
         </tr>
     </template>
 
-    <template id="template-product-two">
-        <tr class="product-item-two">
-            <td>
-                <div class="form-group">
-                    <input type="text" name="ad_link[]" class="form-control ad_link" placeholder="Enter Link">
-                </div>
-            </td>
-
-            <td class="text-center">
-                <a role="button" class="btn btn-danger btn-sm btn-remove-two">X</a>
-            </td>
-        </tr>
-    </template>
 
 </section>
 
@@ -337,28 +324,7 @@
                 }
             });
 
-            $('#btn-add-product-two').click(function () {
-                // alert('ok');
-                var html = $('#template-product-two').html();
-                // console.log(html);
-                var item = $(html);
-                $('#product-container-two').append(item);
 
-                // initProduct();
-
-                if ($('.product-item-two').length >= 1 ) {
-                    $('.btn-remove-two').show();
-                }
-
-            });
-
-            $('body').on('click', '.btn-remove-two', function () {
-                $(this).closest('.product-item-two').remove();
-
-                if ($('.product-item-two').length <= 1 ) {
-                    $('.btn-remove-two').hide();
-                }
-            });
 
             $(document).ready(function() {
                 $('.summernote').summernote();
