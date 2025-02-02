@@ -139,7 +139,10 @@
                 </div>
             </div>
             <div class="row">
-                {!! $adShow->home_page_ad_three ?? '' !!}
+                <div class="col-md-12 d-md-hide">
+                    {!! $adShow->home_page_ad_three ?? '' !!}
+                </div>
+
             </div>
             <div class="container">
                 <h4>ইসলামিক বই</h4>
