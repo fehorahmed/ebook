@@ -178,10 +178,23 @@
                     @endforeach
                 </div><!-- End .row -->
             </div><!-- End .container -->
+            <div class="row">
+                <div class="col-md-4">
+                    {!! $adShow->home_page_ad_two ?? '' !!}
+                </div>
+                <div class="col-md-2">
+                    {!! $adShow->home_page_ad_four ?? '' !!}
+                </div>
+                <div class="col-md-4">
+                    {!! $adShow->home_page_ad_two ?? '' !!}
+                </div>
+                <div class="col-md-2">
+                    {!! $adShow->home_page_ad_four ?? '' !!}
+                </div>
+            </div>
 
-            {!! $adShow->home_page_ad_two ?? '' !!}
 
-            {!! $adShow->home_page_ad_four ?? '' !!}
+
 
             {!! $adShow->home_page_ad_five ?? '' !!}
 
