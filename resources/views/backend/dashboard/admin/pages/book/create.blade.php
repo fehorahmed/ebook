@@ -50,7 +50,8 @@
                                         <select class="form-control" id="category_id" name="category_id">
                                             <option value="">--Select Category--</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" {{old('category_id') == $category->id ?'selected':''}}>
+                                                <option value="{{ $category->id }}"
+                                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>
                                                     {{ $category->name ?? '' }}</option>
                                             @endforeach
                                             @error('category_id')
@@ -67,7 +68,8 @@
                                         <select class="form-control" id="writer_id" name="writer_id">
                                             <option value="">--Select Writer--</option>
                                             @foreach ($writers as $writer)
-                                                <option value="{{ $writer->id }}" {{old('writer_id') == $writer->id ?'selected':''}}>
+                                                <option value="{{ $writer->id }}"
+                                                    {{ old('writer_id') == $writer->id ? 'selected' : '' }}>
                                                     {{ $writer->name ?? '' }}</option>
                                             @endforeach
                                             @error('writer_id')
@@ -81,7 +83,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="" class="form-label">Name</label>
-                                        <input type="text" name="name" value="{{old('name')}}" id="name"
+                                        <input type="text" name="name" value="{{ old('name') }}" id="name"
                                             class="form-control">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
@@ -94,9 +96,9 @@
                                                 class="text-danger">*</span></label>
                                         <select class="form-control" id="status" name="status">
                                             <option value="">--Select Status--</option>
-                                            <option value="1" {{old('status') == '1' ?'selected':''}}> Active
+                                            <option value="1" {{ old('status') == '1' ? 'selected' : '' }}> Active
                                             </option>
-                                            <option value="0" {{old('status') == '0' ?'selected':''}}>
+                                            <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>
                                                 Inactive</option>
                                             @error('status')
                                                 <span class="text-danger">{{ $message }}</span>
@@ -153,6 +155,9 @@
                                                                 value="{{ old('content_name.' . $loop->index) }}"
                                                                 placeholder="Enter Title Name">
                                                         </div>
+                                                        @error('content_name.' . $loop->index)
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </td>
 
                                                     <td>
@@ -160,6 +165,9 @@
                                                             class="form-group {{ $errors->has('description.' . $loop->index) ? 'has-error' : '' }}">
                                                             <textarea class="form-control description summernote" name="description[]" name="description[]">{{ old('description.' . $loop->index) }}</textarea>
                                                         </div>
+                                                        @error('description.' . $loop->index)
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </td>
                                                     <td class="text-center">
                                                         <a role="button" class="btn btn-danger btn-sm btn-remove">X</a>

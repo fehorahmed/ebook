@@ -202,7 +202,7 @@
                                     <tr class="product-item-two">
                                         <td>
                                             <div class="form-group">
-                                                <input type="text" name="ad_link" value="{{old('ad_link', $book->ad_link ?? '')}}" class="form-control ad_link" placeholder="Enter Link">
+                                                <input type="text" name="ad_link" value="{{old('ad_link', $book->ad_link ?? '')}}" class="form-control" placeholder="Enter Link">
                                             </div>
                                         </td>
                                         <td>

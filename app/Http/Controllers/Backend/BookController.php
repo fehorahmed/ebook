@@ -49,6 +49,11 @@ class BookController extends Controller
             'ad_link' => 'required|string|max:255',
             'ad_count' => 'required|numeric',
             'ad_coin' => 'required|numeric',
+            // 'content_name' => 'required|array',
+            'content_name.*' => 'required|string|max:255',
+            // 'description' => 'required|array',
+            'description.*' => 'required|string|max:20000',
+
         ]);
         try {
             DB::beginTransaction();
